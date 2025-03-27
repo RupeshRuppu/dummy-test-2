@@ -1,0 +1,49 @@
+## ERROR
+1. Profile Details
+EditProfile: "Unauthorized. You can only update your own user details."
+2. Error fetching timeline tweets: AxiosError fetchData @ TimelineTweet.jsx:17
+3. Error fetching timeline tweets: AxiosError fetchData @ TimelineTweet.jsx:17
+
+
+
+
+## Backend Coding
+
+models: user, tweet
+routes:
+auth: /register, /login
+user: /getUserById, /followUser, /unfollowUser
+/addProfilePicture, /editprofile
+
+    tweet: /createNewTweet
+           /getById/:id
+           /gettweetById/:id/like
+    	/gettweetById/:id/unlike
+    	/gettweetById/:id/reply
+    	/getAllTweets
+    	/getAllTweets/:id
+    	/retweet/:id
+
+FrontEnd:
+
+    Registration
+    login
+    updateProfilePicture, edit profile
+    add new tweet
+    show all tweets on home page
+    like, dislike, comment, retweet
+    follow unfllow user
+
+
+// To Do's
+
+
+2.  we will need to populate data of all the users who follow to show in the UI.
+3.  a. Get a single user details - populate following and followers data
+4.  Use of Node Mailer
+5.  Notifications: Provide notifications to alert users about new likes, comments, follows, and mentions.
+6.  "Direct Messages" for one-on-one or group conversations.
+7.  Delete user details by ID - Not mentioned in documentation
+8.  verification system that allows notable individuals or brands to have a verified badge on their profiles, signifying their authenticity. Can be done by verifying the e-mail id & mobile number; 1 USER = 1 E-mail & 1 Mobile Number
+9.  Search Functionality: to find specific users, hashtags, or topics.
+10. Profile Customization: Users can customize the appearance of their profiles to some extent, such as choosing a profile picture, header image, and writing a bio.

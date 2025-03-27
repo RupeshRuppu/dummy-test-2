@@ -1,0 +1,24 @@
+These are my frontend codes of the Homepage , connect to the backend of my code as per the code previously shared. 
+
+Before sharing the frontend code I would like to share a brief description of the Home page :
+
+3. Home Page - This page will be the main landing page of our app - the page is divided into two columns sidebar and tweet list a. Sidebar - Sidebar will contain all the navigation links, app logo and logged in user name and email - Clicking on the nav links will get to appropriate page - We also have a logout button and clicking this will logout the user and redirect to the login page again. 
+
+b. Tweet list This section will contain list of tweets where each tweet card will contain the following details: - User photo, user name, tweet time, delete button (only user who created the tweet can only delete), tweet content, like button, retweet button and reply button - On clicking the like button a tweet will be liked and the icon will turn into a red color. - On clicking on the reply button a dialog will open where user can enter tweet details and submit - We will also have a tweet button when clicking on it will open a dialog asking for tweet content and will create a new tweet when submit
+
+Note: the tweets list section is scrollable and sidebar will remain as sticky
+
+Delete button (only visible on tweets which logged in user tweeted)
+
+Clicking on the tweet button will open tweet Modal dialog
+
+Show toast after every successful operation using react-hot-toast
+
+Retweet indicator Add a text indicator like below if a tweet is retweeted by someone (with username)
+
+Username in the tweet card username in the tweet card is clickable which will go to that user profile page
+
+Reply on Tweet
+Clicking on reply button will open a dialog where you can enter tweet details and reply your tweet
+
+Now I will share the codes after giving you the code I will say " Code uploaded" after that you make the connection between the backend and frontend also, you add comments for any UI component is missing. 
