@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL, Authorization } from "../../config/config";
 
-const CreatePollModal = ({ fetchTweets }) => {
+const CreatePollModal = ({ fetchData }) => {
 	const [polls, setPolls] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [question, setQuestion] = useState("");
+	const inputRef = useRef(null);
+
+	useEffect(() => {
+		if (isOpen && inputRef.current) {
+			inputRef.current.focus();
+		}
+	}, [isOpen]);
 
 	const addNewTweet = async () => {
 		try {
@@ -15,7 +22,7 @@ const CreatePollModal = ({ fetchTweets }) => {
 				Authorization
 			);
 			if (response.status === 201) {
-				fetchTweets();
+				fetchData();
 				setPolls([response.data, ...polls]);
 			}
 		} catch (error) {
@@ -65,6 +72,7 @@ const CreatePollModal = ({ fetchTweets }) => {
 						<div className="bg-white px-4 pb-4 sm:p-6 sm:pb-4">
 							<input
 								type="text"
+								ref={inputRef}
 								value={question}
 								onChange={e => {
 									setQuestion(e.target.value);

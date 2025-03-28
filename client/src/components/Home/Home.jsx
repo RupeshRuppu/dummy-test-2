@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../components/Modal/CreateTweet";
 import TimelineTweet from "../Explore/TimelineTweet";
 import CreatePollModal from "../Modal/CreatePoll";
+import axios from "axios";
+import { API_BASE_URL, Authorization } from "../../config/config";
 
 const Home = () => {
-	const fetchTweets = () => {
-		console.log("Fetching tweets...");
+	const [timelineTweets, setTimelineTweets] = useState([]);
+
+	const fetchData = async () => {
+		try {
+			const response = await axios.get(`${API_BASE_URL}/tweets`, Authorization);
+			setTimelineTweets(response.data.tweets);
+		} catch (error) {
+			console.error("Error fetching timeline tweets:", error);
+		}
 	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
 	return (
 		<>
 			{/* Header Section */}
@@ -15,14 +29,14 @@ const Home = () => {
 				{/* Button to open the create tweet modal */}
 				<div className="flex gap-4">
 					<button className="flex-none rounded-full bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-darkblue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-						<Modal fetchTweets={fetchTweets} />
+						<Modal fetchData={fetchData} />
 					</button>
 					<button className="flex-none rounded-full bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-darkblue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-						<CreatePollModal fetchTweets={fetchTweets} />
+						<CreatePollModal fetchData={fetchData} />
 					</button>
 				</div>
 			</div>
-			<TimelineTweet />
+			<TimelineTweet timelineTweets={timelineTweets} fetchData={fetchData} />
 		</>
 	);
 };

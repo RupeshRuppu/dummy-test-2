@@ -1,43 +1,26 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { API_BASE_URL, Authorization } from "../../config/config";
+import { useRef, useEffect } from "react";
 
-const Modal = ({ fetchTweets }) => {
-	// State variables for managing tweets, new tweet content, and modal visibility
-	const [tweets, setTweets] = useState([]);
+const Modal = ({ fetchData }) => {
 	const [newTweetContent, setNewTweetContent] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
+	const inputRef = useRef(null);
 
-	// Function to fetch tweets on component mount
-	const fetchUpdatedTweets = async () => {
-		try {
-			const response = await axios.get(`${API_BASE_URL}/tweets`, Authorization);
-			if (response.status === 200) {
-				setTweets(response.data.tweets);
-			}
-		} catch (error) {
-			console.error(error);
+	useEffect(() => {
+		if (isOpen && inputRef.current) {
+			inputRef.current.focus();
 		}
-	};
-
-	// Object representing the new tweet with its content
+	}, [isOpen]);
 	const newTweet = { content: newTweetContent };
 
 	// Function to add a new tweet
 	const addNewTweet = async () => {
 		try {
 			// Use axios to post the new tweet
-			const response = await axios.post(
-				`${API_BASE_URL}/tweet`,
-				newTweet,
-				Authorization
-			);
-			if (response.status === 201) {
-				// Fetch tweets after posting the new tweet
-				fetchTweets();
-				// Update the tweets state with the new tweet
-				setTweets([response.data, ...tweets]);
-			}
+			await axios.post(`${API_BASE_URL}/tweet`, newTweet, Authorization);
+			await fetchData();
 		} catch (error) {
 			console.error(error);
 		}
@@ -75,6 +58,7 @@ const Modal = ({ fetchTweets }) => {
 						{/* Tweet Input Section */}
 						<div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
 							<textarea
+								ref={inputRef}
 								className="w-full h-32 p-2 mb-4 border rounded"
 								placeholder="What's happening?"
 								value={newTweetContent}
